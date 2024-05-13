@@ -10,23 +10,42 @@ class CoordinatesPage extends StatefulWidget {
 }
 
 class _CoordinatesPageState extends State<CoordinatesPage> {
-  Future<List<Location>> getLocationFromCityName() async {
-    return await locationFromAddress("Settat");
+  Future<List<Location>> getLocationFromCityName(city) async {
+    return await locationFromAddress(city);
   }
 
   @override
   void initState() {
     super.initState();
-    getLocationFromCityName().then((value) {
+
+    getLocationFromCityName(widget.cityName).then((value) {
       print(value.first);
+      setState(() {
+        lat = value.first.latitude;
+        long = value.first.longitude;
+      });
     });
   }
 
+  double lat = 0;
+  double long = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(widget.cityName),
+        child: Container(
+          // height: MediaQuery.of(context).size.height,
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("City name : ${widget.cityName}"),
+              Text("Latitude : ${lat}"),
+              Text("Longitude name : ${long}"),
+            ],
+          ),
+        ),
       ),
     );
   }
