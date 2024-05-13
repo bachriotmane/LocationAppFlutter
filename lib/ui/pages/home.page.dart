@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:location_proj/ui/pages/cordinates.page.dart';
 import 'package:location_proj/ui/widgets/city.item.dart';
 import 'package:location_proj/ui/widgets/textfiled.custom.dart';
 
@@ -117,6 +118,14 @@ class _HomePageState extends State<HomePage> {
           itemCount: cities.length,
           itemBuilder: (c, index) => CityItem(
                 cityName: cities[index],
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (c) => CoordinatesPage(
+                                cityName: cities[index],
+                              )));
+                },
                 deleteItem: () {
                   setState(() {
                     cities.removeAt(index);
