@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:latlong2/latlong.dart';
 
 class CoordinatesPage extends StatefulWidget {
   const CoordinatesPage({super.key, required this.cityName});
@@ -43,6 +45,12 @@ class _CoordinatesPageState extends State<CoordinatesPage> {
               Text("City name : ${widget.cityName}"),
               Text("Latitude : ${lat}"),
               Text("Longitude name : ${long}"),
+              const FlutterMap(
+                options: MapOptions(
+                  initialCenter: LatLng(51.509364, -0.128928),
+                ),
+                children: [],
+              ),
             ],
           ),
         ),
